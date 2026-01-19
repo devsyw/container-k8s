@@ -1,13 +1,12 @@
 global:
   registry: "192.168.2.2:32000"
   domain: "192.168.2.2.nip.io"
-
 # Backend 설정 - 리소스 축소
 backend:
   enabled: true
   image:
     repository: backend
-    tag: latest
+    tag: 6cab43b
   port: 8080
   replicas: 1
   env:
@@ -20,7 +19,6 @@ backend:
     limits:
       memory: "512Mi"
       cpu: "250m"
-
 # Frontend 설정 - 리소스 축소
 frontend:
   enabled: true
@@ -36,7 +34,6 @@ frontend:
     limits:
       memory: "128Mi"
       cpu: "100m"
-
 # code-server 설정 - 리소스 축소
 codeServer:
   enabled: true
@@ -52,7 +49,6 @@ codeServer:
     limits:
       memory: "512Mi"
       cpu: "250m"
-
 # Jupyter 설정 - 리소스 축소
 jupyter:
   enabled: true
@@ -68,7 +64,6 @@ jupyter:
     limits:
       memory: "512Mi"
       cpu: "250m"
-
 # Ingress 설정
 ingress:
   enabled: true
@@ -76,7 +71,6 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-
 # Persistence 설정
 persistence:
   enabled: false
