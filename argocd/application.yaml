@@ -1,0 +1,35 @@
+# ===========================================
+# ArgoCD Application 정의
+# ===========================================
+# container-platform 전체를 관리하는 ArgoCD App
+# ===========================================
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: container-platform
+  namespace: argocd
+spec:
+  project: default
+  
+  # Git 저장소 정보
+  source:
+    repoURL: https://github.com/devsyw/container-k8s.git
+    targetRevision: main
+    path: apps/container-platform
+    helm:
+      valueFiles:
+        - values.yaml
+  
+  # 배포 대상 클러스터
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: user-containers
+  
+  # 동기화 정책
+  syncPolicy:
+    # 자동 동기화 비활성화 (수동 Sync 버튼 사용)
+    # automated:
+    #   prune: true
+    #   selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,15 +1,43 @@
-# ===========================================
-# Container Platform Helm Chart Values
-# ===========================================
-
-# 전역 설정
 global:
-  # Private Registry 주소
   registry: "192.168.2.2:32000"
-  # 기본 도메인 (Ingress용)
   domain: "192.168.2.2.nip.io"
 
-# code-server (VS Code Web) 설정
+# Backend 설정
+backend:
+  enabled: true
+  image:
+    repository: backend
+    tag: latest
+  port: 8080
+  replicas: 1
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+    KUBERNETES_ENABLED: "true"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Frontend 설정
+frontend:
+  enabled: true
+  image:
+    repository: frontend
+    tag: latest
+  port: 80
+  replicas: 1
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+
+# code-server 설정
 codeServer:
   enabled: true
   image:
@@ -25,7 +53,7 @@ codeServer:
       memory: "2Gi"
       cpu: "1000m"
 
-# Jupyter Notebook 설정
+# Jupyter 설정
 jupyter:
   enabled: true
   image:
@@ -41,21 +69,6 @@ jupyter:
       memory: "2Gi"
       cpu: "1000m"
 
-# Python 개발환경 설정
-pythonDev:
-  enabled: true
-  image:
-    repository: python-base
-    tag: 3.11-offline
-  port: 8000
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "100m"
-    limits:
-      memory: "1Gi"
-      cpu: "500m"
-
 # Ingress 설정
 ingress:
   enabled: true
@@ -64,12 +77,6 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 
-# PersistentVolume 설정
-# persistence:
-#   enabled: true
-#   storageClass: ""  # 기본 StorageClass 사용
-#   size: 1Gi
-
-# Persistence 비활성화 (emptyDir 사용)
+# Persistence 설정
 persistence:
   enabled: false
