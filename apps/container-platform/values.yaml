@@ -24,7 +24,7 @@ frontend:
   enabled: true
   image:
     repository: frontend
-    tag: latest
+    tag: f0b84f4
   port: 80
   replicas: 1
   resources:
