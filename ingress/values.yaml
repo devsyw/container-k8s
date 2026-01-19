@@ -1,0 +1,30 @@
+# ===========================================
+# NGINX Ingress Controller Helm Values
+# ===========================================
+# 설치 명령:
+# helm install ingress-nginx ingress-nginx/ingress-nginx \
+#   -n ingress-nginx --create-namespace -f ingress/values.yaml
+# ===========================================
+
+controller:
+  # NodePort로 서비스 노출 (LoadBalancer 없는 환경)
+  service:
+    type: NodePort
+    nodePorts:
+      http: 30080
+      https: 30443
+  
+  # 리소스 제한
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  
+  # Ingress Class 설정
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: true

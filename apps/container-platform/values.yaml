@@ -1,0 +1,75 @@
+# ===========================================
+# Container Platform Helm Chart Values
+# ===========================================
+
+# 전역 설정
+global:
+  # Private Registry 주소
+  registry: "192.168.2.2:32000"
+  # 기본 도메인 (Ingress용)
+  domain: "192.168.2.2.nip.io"
+
+# code-server (VS Code Web) 설정
+codeServer:
+  enabled: true
+  image:
+    repository: code-server
+    tag: latest
+  port: 8080
+  password: "password123"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+
+# Jupyter Notebook 설정
+jupyter:
+  enabled: true
+  image:
+    repository: jupyter
+    tag: latest
+  port: 8888
+  token: "token123"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+
+# Python 개발환경 설정
+pythonDev:
+  enabled: true
+  image:
+    repository: python-base
+    tag: 3.11-offline
+  port: 8000
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Ingress 설정
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+
+# PersistentVolume 설정
+# persistence:
+#   enabled: true
+#   storageClass: ""  # 기본 StorageClass 사용
+#   size: 1Gi
+
+# Persistence 비활성화 (emptyDir 사용)
+persistence:
+  enabled: false

@@ -1,0 +1,17 @@
+# 사용자 컨테이너가 실행될 Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user-containers
+  labels:
+    app.kubernetes.io/name: user-containers
+    app.kubernetes.io/part-of: container-platform
+---
+# Private Registry Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry
+  labels:
+    app.kubernetes.io/name: registry
+    app.kubernetes.io/part-of: container-platform
