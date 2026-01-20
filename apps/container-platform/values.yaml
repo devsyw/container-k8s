@@ -6,7 +6,7 @@ backend:
   enabled: true
   image:
     repository: backend
-    tag: 62e25c2
+    tag: 18852eb
   port: 8080
   replicas: 1
   env:
