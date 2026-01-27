@@ -77,6 +77,11 @@ persistence:
 # JupyterHub 설정
 jupyterhub:
   enabled: true
+  prePuller:
+    hook:
+      enabled: false
+    continuous:
+      enabled: false
   hub:
     config:
       Authenticator:
