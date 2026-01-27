@@ -6,7 +6,7 @@ backend:
   enabled: true
   image:
     repository: backend
-    tag: 18852eb
+    tag: latest
   port: 8080
   replicas: 1
   env:
@@ -24,7 +24,7 @@ frontend:
   enabled: true
   image:
     repository: frontend
-    tag: 2a7371e
+    tag: latest
   port: 80
   replicas: 1
   resources:
