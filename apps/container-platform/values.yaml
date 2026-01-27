@@ -84,24 +84,24 @@ jupyterhub:
       enabled: false
   
   # Hub 설정
-hub:
-  db:
-    type: sqlite-memory  # 메모리에 저장 (영구 저장 안 함)
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "100m"
-    limits:
-      memory: "512Mi"
-      cpu: "500m"
-  config:
-      Authenticator:
-        admin_users:
-          - admin
-      DummyAuthenticator:
-        password: test1234
-      JupyterHub:
-        authenticator_class: dummy
+  hub:
+    db:
+      type: sqlite-memory  # 메모리에 저장 (영구 저장 안 함)
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    config:
+        Authenticator:
+          admin_users:
+            - admin
+        DummyAuthenticator:
+          password: test1234
+        JupyterHub:
+          authenticator_class: dummy
   
   # Proxy 설정
   proxy:
