@@ -82,7 +82,16 @@ jupyterhub:
       enabled: false
     continuous:
       enabled: false
+  
+  # Hub 설정
   hub:
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
     config:
       Authenticator:
         admin_users:
@@ -91,17 +100,42 @@ jupyterhub:
         password: test1234
       JupyterHub:
         authenticator_class: dummy
+  
+  # Proxy 설정
+  proxy:
+    chp:
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "100m"
+        limits:
+          memory: "256Mi"
+          cpu: "250m"
+    service:
+      type: ClusterIP
+  
+  # Scheduler 비활성화 (리소스 절약)
+  scheduling:
+    userScheduler:
+      enabled: false
+  
+  # SingleUser 설정
   singleuser:
     image:
       name: quay.io/jupyterhub/k8s-singleuser-sample
       tag: "4.1.0"
     storage:
       capacity: 1Gi
+    memory:
+      limit: 1G
+      guarantee: 512M
+    cpu:
+      limit: 1
+      guarantee: 0.2
+  
+  # Ingress 설정
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
       - jupyterhub.192.168.2.2.nip.io
-  proxy:
-    service:
-      type: ClusterIP
