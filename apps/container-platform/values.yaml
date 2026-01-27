@@ -6,7 +6,7 @@ backend:
   enabled: true
   image:
     repository: backend
-    tag: f93b8ff
+    tag: f708730
   port: 8080
   replicas: 1
   env:
@@ -24,7 +24,7 @@ frontend:
   enabled: true
   image:
     repository: frontend
-    tag: 65667ea
+    tag: 089fc7a
   port: 80
   replicas: 1
   resources:
@@ -85,7 +85,7 @@ jupyterhub:
   # Hub 설정
   hub:
     db:
-      type: sqlite-memory  # 메모리에 저장 (영구 저장 안 함)
+      type: sqlite-memory # 메모리에 저장 (영구 저장 안 함)
     resources:
       requests:
         memory: "256Mi"
@@ -94,6 +94,7 @@ jupyterhub:
         memory: "512Mi"
         cpu: "500m"
     config:
+
         Authenticator:
           admin_users:
             - admin
@@ -117,7 +118,6 @@ jupyterhub:
   scheduling:
     userScheduler:
       enabled: false
-  # Singleuser 설정
   singleuser:
     image:
       name: quay.io/jupyterhub/k8s-singleuser-sample
@@ -130,6 +130,5 @@ jupyterhub:
     cpu:
       limit: 1
       guarantee: 0.2
-    # 이거 추가
     cloudMetadata:
       blockWithIptables: false
