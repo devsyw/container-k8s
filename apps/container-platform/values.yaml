@@ -84,15 +84,17 @@ jupyterhub:
       enabled: false
   
   # Hub 설정
-  hub:
-    resources:
-      requests:
-        memory: "256Mi"
-        cpu: "100m"
-      limits:
-        memory: "512Mi"
-        cpu: "500m"
-    config:
+hub:
+  db:
+    type: sqlite-memory  # 메모리에 저장 (영구 저장 안 함)
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  config:
       Authenticator:
         admin_users:
           - admin
