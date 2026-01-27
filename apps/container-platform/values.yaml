@@ -82,6 +82,11 @@ jupyterhub:
       enabled: false
     continuous:
       enabled: false
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - jupyterhub.192.168.2.2.nip.io
   # Hub 설정
   hub:
     db:
@@ -132,8 +137,3 @@ jupyterhub:
       guarantee: 0.2
     cloudMetadata:
       blockWithIptables: false
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      hosts:
-        - jupyterhub.192.168.2.2.nip.io
