@@ -24,7 +24,7 @@ frontend:
   enabled: true
   image:
     repository: frontend
-    tag: latest
+    tag: 65667ea
   port: 80
   replicas: 1
   resources:
@@ -74,7 +74,6 @@ ingress:
 # Persistence 설정
 persistence:
   enabled: false
-
 # JupyterHub 설정
 jupyterhub:
   enabled: true
