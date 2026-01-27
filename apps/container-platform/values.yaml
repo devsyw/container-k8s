@@ -24,7 +24,7 @@ frontend:
   enabled: true
   image:
     repository: frontend
-    tag: 65667ea
+    tag: 089fc7a
   port: 80
   replicas: 1
   resources:
@@ -82,11 +82,10 @@ jupyterhub:
       enabled: false
     continuous:
       enabled: false
-  
   # Hub 설정
   hub:
     db:
-      type: sqlite-memory  # 메모리에 저장 (영구 저장 안 함)
+      type: sqlite-memory # 메모리에 저장 (영구 저장 안 함)
     resources:
       requests:
         memory: "256Mi"
@@ -95,14 +94,13 @@ jupyterhub:
         memory: "512Mi"
         cpu: "500m"
     config:
-        Authenticator:
-          admin_users:
-            - admin
-        DummyAuthenticator:
-          password: test1234
-        JupyterHub:
-          authenticator_class: dummy
-  
+      Authenticator:
+        admin_users:
+          - admin
+      DummyAuthenticator:
+        password: test1234
+      JupyterHub:
+        authenticator_class: dummy
   # Proxy 설정
   proxy:
     chp:
@@ -115,12 +113,10 @@ jupyterhub:
           cpu: "250m"
     service:
       type: ClusterIP
-  
   # Scheduler 비활성화 (리소스 절약)
   scheduling:
     userScheduler:
       enabled: false
-  
   # SingleUser 설정
   singleuser:
     image:
@@ -134,7 +130,6 @@ jupyterhub:
     cpu:
       limit: 1
       guarantee: 0.2
-  
   # Ingress 설정
   ingress:
     enabled: true
