@@ -87,10 +87,14 @@ jupyterhub:
     ingressClassName: nginx
     hosts:
       - jupyterhub.192.168.2.2.nip.io
-  # Hub 설정
+  cull:
+    enabled: true
+    timeout: 3600
+    every: 300
+    maxAge: 28800
   hub:
     db:
-      type: sqlite-memory # 메모리에 저장 (영구 저장 안 함)
+      type: sqlite-memory
     resources:
       requests:
         memory: "256Mi"
@@ -99,15 +103,13 @@ jupyterhub:
         memory: "512Mi"
         cpu: "500m"
     config:
-
-        Authenticator:
-          admin_users:
-            - admin
-        DummyAuthenticator:
-          password: test1234
-        JupyterHub:
-          authenticator_class: dummy
-  # Proxy 설정
+      Authenticator:
+        admin_users:
+          - admin
+      DummyAuthenticator:
+        password: test1234
+      JupyterHub:
+        authenticator_class: dummy
   proxy:
     chp:
       resources:
@@ -119,7 +121,6 @@ jupyterhub:
           cpu: "250m"
     service:
       type: ClusterIP
-  # Scheduler 비활성화 (리소스 절약)
   scheduling:
     userScheduler:
       enabled: false
